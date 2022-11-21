@@ -3,6 +3,10 @@ on: [push, pull_request]
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+    env:
+      BRANCH: "${{ github.ref_name }}:-${{ github.head_ref }}"
+      TRAVIS_PULL_REQUEST_BRANCH: ${{ github.ref_name }}
+      TRAVIS_BRANCH: ${{ github.head_ref }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -14,3 +18,5 @@ jobs:
         run: npm run test
       - name: Create coverage
         run: npm run coverage
+      - name: Deploy
+        run: npm run travis:verify && curl -sSL https://raw.githubusercontent.com/RedHatInsights/insights-frontend-builder-common/master/src/bootstrap.sh | bash -s
