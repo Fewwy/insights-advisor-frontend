@@ -14,6 +14,8 @@ jobs:
       REPO: "git@github.com:RedHatInsights/insights-advisor-frontend-build"
       REPO_DIR: "insights-advisor-frontend-build"
     steps:
+      - name: "Name current branch"
+        run: echo "$BRANCH $TRAVIS_PULL_REQUEST_BRANCH $TRAVIS_BRANCH"
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install dependencies

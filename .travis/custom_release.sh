@@ -2,7 +2,7 @@
 set -e
 set -x
 
-if [ "${TRAVIS_BRANCH}" = "master" ]
+if [ "${BRANCH}" = "master" ]
 then
     for env in ci qa
     do
@@ -13,7 +13,7 @@ then
 fi
 
 
-if [ "${TRAVIS_BRANCH}" = "master-stable" ]
+if [ "${BRANCH}" = "master-stable" ]
 then
     for env in ci qa
     do
@@ -23,8 +23,8 @@ then
     done
 fi
 
-if [[ "${TRAVIS_BRANCH}" = "prod-beta" || "${TRAVIS_BRANCH}" = "prod-stable" ]]; then
-    echo "PUSHING ${TRAVIS_BRANCH}"
+if [[ "${BRANCH}" = "prod-beta" || "${BRANCH}" = "prod-stable" ]]; then
+    echo "PUSHING ${BRANCH}"
     rm -rf ./build/.git
-    .travis/release.sh "${TRAVIS_BRANCH}"
+    .travis/release.sh "${BRANCH}"
 fi
