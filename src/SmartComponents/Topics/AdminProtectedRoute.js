@@ -11,7 +11,6 @@ const AdminProtectedRoute = ({ component: Component, ...props }) => {
     isInternal: false,
     loaded: false,
   });
-
   useEffect(() => {
     insights.chrome.auth
       .getUser()
